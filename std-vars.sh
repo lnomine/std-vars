@@ -9,6 +9,11 @@ gateway=$(ip route show default | awk '/default/ { print $3 }')
 dns=$(grep nameserver /etc/resolv.conf | grep -v "\#" | head -1 | awk '{ print $2 }')
 password=$(cat /tmp/password)
 
+if [ "$dns" == "127.0.0.53" ]; 
+then
+dns=$(grep -w "DNS" /etc/systemd/resolved.conf | grep -v "\#" | cut -d '=' -f2 | awk '{ print $1 }')
+fi
+
 grep -q "/boot" /boot/grub/grub.cfg
 if [ $? -eq 1 ];
 then
