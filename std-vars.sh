@@ -32,7 +32,7 @@ fi
 if [[ "$gateway" =~ "10.255" || "$gateway" =~ "172.31" ]]; 
 then
 mirror="212.27.32.66"
-if [ "$gateway" == "172.31" ];
+if [ "$gateway" =~ "172.31" ];
 then
 interface=$(ip addr | grep altname | awk '{ print $2 }')
 fi
