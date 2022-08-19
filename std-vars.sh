@@ -29,13 +29,14 @@ then
 dns=" 213.136.95.10"
 fi
 
-if [[ "$gateway" =~ "10.255" || "$gateway" =~ "172.31" ]]; 
-then
-mirror="212.27.32.66"
 if [ "$gateway" =~ "172.31" ];
 then
 interface=$(ip addr | grep altname | awk '{ print $2 }')
 fi
+
+if [[ "$gateway" =~ "10.255" || "$gateway" =~ "172.31" ]]; 
+then
+mirror="212.27.32.66"
 earlycheck="sh -c 'ip link set dev $interface up ; ip addr add $link dev $interface ; ip route add $gateway dev $interface; ip route add default via $gateway dev $interface; mv /sbin/ip /sbin/ip2 ; echo exit 0 > /sbin/ip'"
 type=""
 debconfgateway="none"
