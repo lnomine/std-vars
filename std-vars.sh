@@ -25,7 +25,7 @@ mirror="212.27.32.66"
 earlycheck="sh -c 'ip link set dev $interface up ; ip addr add $link dev $interface ; ip route add $gateway dev $interface; ip route add default via $gateway dev $interface; mv /sbin/ip /sbin/ip2 ; echo exit 0 > /sbin/ip'"
 type=""
 debconfgateway="none"
-latecommand="sh -c 'echo \'@reboot  root  dhclient\' >> /etc/crontab'"
+latecommand="sh -c 'echo @reboot root dhclient >> /etc/crontab'"
 fi
 
 grep -q "/boot" /boot/grub/grub.cfg
