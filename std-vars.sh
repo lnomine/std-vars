@@ -29,7 +29,7 @@ then
 dns=" 213.136.95.10"
 fi
 
-if [ "$gateway" =~ "172.31" ];
+if [[ "$gateway" =~ "172.31" ]];
 then
 export interface=$(ip addr | grep altname | awk '{ print $2 }')
 fi
