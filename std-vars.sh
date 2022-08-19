@@ -13,6 +13,7 @@ mirror="deb.debian.org"
 password=$(cat /tmp/password)
 earlycheck="exit 0"
 type="string"
+latecommand="'"
 
 if [ "$dns" == "127.0.0.53" ]; 
 then
@@ -25,7 +26,7 @@ mirror="212.27.32.66"
 earlycheck="sh -c 'ip link set dev $interface up ; ip addr add $link dev $interface ; ip route add $gateway dev $interface; ip route add default via $gateway dev $interface; mv /sbin/ip /sbin/ip2 ; echo exit 0 > /sbin/ip'"
 type=""
 debconfgateway="none"
-latecommand="sh -c 'echo @reboot root dhclient >> /etc/crontab'"
+latecommand="; echo @reboot root dhclient >> /etc/crontab'"
 fi
 
 grep -q "/boot" /boot/grub/grub.cfg
