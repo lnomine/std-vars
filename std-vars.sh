@@ -3,10 +3,11 @@
 apt update ; apt install -y ipcalc
 
 interface=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)')
-link=$(ip -4 -o addr show up primary scope global | while read -r num dev fam addr rest; do echo ${addr}; done)
-ip=$(echo ${link} | awk '{ print $1 }' | cut -d '/' -f1)
+allips=$(ip -4 -o addr show up primary scope global | while read -r num dev fam addr rest; do echo ${addr}; done)
+link=$(echo ${allips} | awk '{ print $1 }')
+ip=$(echo ${link} | cut -d '/' -f1)
 extip=`curl -s ipv4.icanhazip.com`
-netmask=$(ipcalc ${link} | awk '{ print $1 }'| grep Netmask | awk '{ print $2 }')
+netmask=$(ipcalc ${link} | grep Netmask | awk '{ print $2 }')
 gateway=$(ip route show default | awk '/default/ { print $3 }')
 debconfgateway=$gateway
 dns=$(grep nameserver /etc/resolv.conf | egrep -v "\#|:" | head -1 | awk '{ print $2 }')
