@@ -20,7 +20,7 @@ fi
 if [ "$gateway" == "10.255.255.1" ]; 
 then
 mirror="212.27.32.66"
-earlycheck="sh -c 'ip link set dev $interface up ; ip addr add $link dev $interface ; ip route add $gateway dev $interface; ip route add default via $gateway dev $interface; mv /sbin/ip /sbin/ip2 ; echo "exit 0" > /sbin/ip'"
+earlycheck="sh -c 'ip link set dev $interface up ; ip addr add $link dev $interface ; ip route add $gateway dev $interface; ip route add default via $gateway dev $interface; mv /sbin/ip /sbin/ip2 ; echo exit 0 > /sbin/ip'"
 fi
 
 grep -q "/boot" /boot/grub/grub.cfg
