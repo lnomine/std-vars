@@ -16,9 +16,16 @@ earlycheck="exit 0"
 type="string"
 latecommand="'"
 
+### Workarounds
+
 if [ "$dns" == "127.0.0.53" ]; 
 then
 dns=$(grep -w "DNS" /etc/systemd/resolved.conf | grep -v "\#" | cut -d '=' -f2 | awk '{ print $1 }')
+fi
+
+if [ "$dns" == " 213.136.95.11" ]; 
+then
+dns=" 213.136.95.10"
 fi
 
 if [ "$gateway" == "10.255.255.1" ]; 
