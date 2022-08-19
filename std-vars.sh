@@ -12,6 +12,7 @@ dns=$(grep nameserver /etc/resolv.conf | grep -v "\#" | head -1 | awk '{ print $
 mirror="deb.debian.org"
 password=$(cat /tmp/password)
 earlycheck="exit 0"
+type="string"
 
 if [ "$dns" == "127.0.0.53" ]; 
 then
@@ -22,6 +23,7 @@ if [ "$gateway" == "10.255.255.1" ];
 then
 mirror="212.27.32.66"
 earlycheck="sh -c 'ip link set dev $interface up ; ip addr add $link dev $interface ; ip route add $gateway dev $interface; ip route add default via $gateway dev $interface; mv /sbin/ip /sbin/ip2 ; echo exit 0 > /sbin/ip'"
+type=""
 debconfgateway="none"
 fi
 
