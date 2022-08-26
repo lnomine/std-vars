@@ -33,6 +33,7 @@ if [[ "$gateway" =~ "172.31" ]];
 then
 checkinterface=$(ip addr | grep altname | awk '{ print $2 }')
 if [ $? -eq 0 ];
+then
 interface=${checkinterface}
 fi
 fi
