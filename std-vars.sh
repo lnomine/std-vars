@@ -11,6 +11,7 @@ netmask=$(ipcalc ${link} | grep Netmask | awk '{ print $2 }')
 gateway=$(ip route show default | awk '/default/ { print $3 }')
 debconfgateway=$gateway
 dns=$(grep nameserver /etc/resolv.conf | egrep -v "\#|:" | head -1 | awk '{ print $2 }')
+disk=$(lsblk -d | grep disk | awk '{ print $1 }')
 mirror="deb.debian.org"
 password=$(cat /tmp/password)
 earlycheck="exit 0"
