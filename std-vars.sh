@@ -1,12 +1,11 @@
 #!/bin/bash
 
-apt update ; apt install -y ipcalc curl
+apt update ; apt install -y ipcalc
 
 interface=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)')
 allips=$(ip -4 -o addr show up primary scope global | while read -r num dev fam addr rest; do echo ${addr}; done)
 link=$(echo ${allips} | awk '{ print $1 }')
 ip=$(echo ${link} | cut -d '/' -f1)
-extip=`curl -s ipv4.icanhazip.com`
 netmask=$(ipcalc ${link} | grep Netmask | awk '{ print $2 }')
 gateway=$(ip route show default | awk '/default/ { print $3 }')
 debconfgateway=$gateway
@@ -23,11 +22,6 @@ latecommand="'"
 if [ "$dns" == "127.0.0.53" ]; 
 then
 dns=$(grep -w "DNS" /etc/systemd/resolved.conf | grep -v "\#" | cut -d '=' -f2 | awk '{ print $1 }')
-fi
-
-if [ "$dns" == " 213.136.95.11" ]; 
-then
-dns=" 213.136.95.10"
 fi
 
 if [[ "$gateway" =~ "172.31" ]];
